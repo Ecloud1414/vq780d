@@ -7,8 +7,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Es-Sijasetu esh-Sher'ijje</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap');
 *,*::before,*::after{box-sizing:border-box}
-html,body{margin:0;padding:0;background:#e8e8e8;color:#000;font-family:'Geeza Pro','Al Nile',serif;color-scheme:light}
+html,body{margin:0;padding:0;background:#e8e8e8;color:#000;font-family:'Noto Naskh Arabic','Geeza Pro','Al Nile',serif;color-scheme:light}
 .app{padding-top:44px;padding-bottom:44px}
 .top-bar{position:fixed;top:0;left:0;right:0;height:44px;background:#e8e8e8;border-bottom:1px solid #ddd;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:space-between;justify-content:space-between;padding:0 16px;z-index:10}
 .top-bar .title{font-size:.85rem;color:#444;font-family:Georgia,serif}
@@ -50,6 +51,24 @@ p{margin:.6rem 0}
 .overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:99;display:none}
 .overlay.active{display:block}
 [hidden]{display:none!important}
+@media(hover:hover){
+.s:hover{background:rgba(184,146,62,.13)}
+.word-mode .w:hover{background:rgba(184,146,62,.13)}
+.mode-btn:hover{border-color:#b8923e;color:#b8923e}
+.mode-btn.active:hover{background:#000;color:#fff;border-color:#000}
+.side-arrow:hover:not(:disabled){border-color:#b8923e;color:#b8923e}
+.page-num:hover{background:rgba(184,146,62,.13);color:#b8923e}
+.popup .x:hover{background:rgba(184,146,62,.13);color:#b8923e}
+.s,.word-mode .w,.mode-btn,.side-arrow,.page-num{transition:all .15s}
+}
+@media(min-width:700px){
+.app{padding-bottom:60px}
+.page-wrap{margin:1.5rem auto;min-height:calc(100vh - 160px);padding:2.5rem 3rem;box-shadow:0 1px 6px rgba(0,0,0,.06);border-radius:4px}
+.top-bar .title{font-family:'Source Serif 4',Georgia,serif}
+.mode-btn,.page-num,.popup .lbl{font-family:'Source Serif 4',Georgia,serif}
+.popup .ptxt{font-family:'Source Serif 4',Georgia,serif}
+.title-page .author{font-family:'Source Serif 4',Georgia,serif}
+}
 </style>
 </head>
 <body>
