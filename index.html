@@ -70,6 +70,14 @@ p{margin:.6rem 0}
 .popup .ptxt{font-family:'Source Serif 4',Georgia,serif}
 .title-page .author{font-family:'Source Serif 4',Georgia,serif}
 }
+.spread-btn{display:none}
+@media(min-width:1000px){
+.spread-btn{display:inline-block}
+.page-wrap.spread{max-width:1400px}
+#page.spread{display:-webkit-flex;display:flex}
+#page.spread .page-text{-webkit-flex:1;flex:1;min-width:0;padding:0 1.5rem}
+#page.spread .page-text+.page-text{border-right:1px solid #e5e5e5}
+}
 </style>
 </head>
 <body>
@@ -79,6 +87,7 @@ p{margin:.6rem 0}
 <div class="mode-btns">
 <button class="mode-btn active" data-mode="sentence">Fjali</button>
 <button class="mode-btn" data-mode="word">Fjale</button>
+<button class="mode-btn spread-btn" id="spreadBtn">2 faqe</button>
 </div>
 </div>
 <div class="page-wrap" id="page">
@@ -1540,12 +1549,25 @@ var pu=document.getElementById('popup'),pt=document.getElementById('pText');
 var ov=document.getElementById('overlay'),cb=document.getElementById('closeBtn');
 var allP=document.querySelectorAll('[data-p]');
 
-function render(){
-  for(var i=0;i<allP.length;i++)allP[i].hidden=(i!==cp);
-  pn.textContent=(cp+1)+' / '+total;
-  pb.disabled=cp===0;nb.disabled=cp===total-1;
-  pe.scrollTop=0;hide();
+var spread=false;
+function isWide(){return window.innerWidth>=1000}
+function pairOf(i){
+  if(!spread||!isWide())return[i];
+  if(i===0)return[0];
+  if(i%2===0)i=i-1;
+  var pr=[i];if(i+1<total)pr.push(i+1);
+  return pr;
 }
+function render(){
+  var vis=pairOf(cp);cp=vis[0];
+  for(var i=0;i<allP.length;i++)allP[i].hidden=(vis.indexOf(i)===-1);
+  pe.classList.toggle('spread',vis.length>1);
+  pn.textContent=(vis.length>1?(vis[0]+1)+'\u2013'+(vis[1]+1):(cp+1))+' / '+total;
+  pb.disabled=cp===0;nb.disabled=vis[vis.length-1]>=total-1;
+  window.scrollTo(0,0);pe.scrollTop=0;hide();
+}
+function goPrev(){if(cp===0)return;cp=(spread&&isWide())?(cp===1?0:Math.max(1,cp-2)):cp-1;render()}
+function goNext(){var v=pairOf(cp);if(v[v.length-1]>=total-1)return;cp=(spread&&isWide())?(cp===0?1:cp+2):cp+1;render()}
 
 function show(el,txt){
   if(activeEl)activeEl.classList.remove('active');
@@ -1572,8 +1594,11 @@ pe.addEventListener('click',function(e){
 ov.addEventListener('click',hide);
 cb.addEventListener('click',hide);
 
-pb.addEventListener('click',function(){if(cp>0){cp--;render()}});
-nb.addEventListener('click',function(){if(cp<total-1){cp++;render()}});
+pb.addEventListener('click',goPrev);
+nb.addEventListener('click',goNext);
+var sb=document.getElementById('spreadBtn');
+if(sb){sb.addEventListener('click',function(){spread=!spread;sb.classList.toggle('active',spread);render()});}
+var rsz;window.addEventListener('resize',function(){clearTimeout(rsz);rsz=setTimeout(render,150)});
 
 pn.addEventListener('click',function(){
   if(pn.querySelector('input'))return;
@@ -1598,8 +1623,8 @@ pn.addEventListener('click',function(){
 
 document.addEventListener('keydown',function(e){
   if(e.target.tagName==='INPUT')return;
-  if(e.key==='ArrowLeft'&&cp>0){cp--;render()}
-  if(e.key==='ArrowRight'&&cp<total-1){cp++;render()}
+  if(e.key==='ArrowLeft')goPrev();
+  if(e.key==='ArrowRight')goNext();
   if(e.key==='Escape')hide();
 });
 
@@ -1610,8 +1635,7 @@ document.querySelectorAll('.mode-btn').forEach(function(b){b.addEventListener('c
   hide();
 })});
 
-pn.textContent='1 / '+total;
-pb.disabled=true;nb.disabled=total<=1;
+render();
 </script>
 </body>
 </html>
