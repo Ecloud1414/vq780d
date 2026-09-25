@@ -16,8 +16,8 @@ html,body{margin:0;padding:0;background:#e8e8e8;color:#000;font-family:'Noto Nas
 .mode-btns{display:-webkit-flex;display:flex;gap:4px}
 .mode-btn{font-family:Georgia,serif;font-size:.68rem;padding:3px 8px;border:1px solid #ddd;border-radius:10px;background:transparent;color:#444;cursor:pointer}
 .mode-btn.active{background:#000;color:#fff;border-color:#000}
-.page-wrap{max-width:680px;margin:0 auto;background:#fff;min-height:calc(100vh - 88px);padding:2rem 1.2rem}
-.page-text{font-size:1.2rem;line-height:2.2;direction:rtl;text-align:right}
+.page-wrap{max-width:840px;margin:0 auto;background:#fff;min-height:calc(100vh - 88px);padding:2rem 1.2rem}
+.page-text{font-size:var(--fs,1.35rem);line-height:2.2;direction:rtl;text-align:right}
 .title-page{text-align:center;padding:3rem 1rem;direction:ltr}
 .title-page .ar-title{font-size:2rem;font-weight:700;direction:rtl;line-height:1.6;margin-bottom:1rem}
 .title-page .author{font-family:Georgia,serif;font-size:.95rem;color:#444;margin-top:1.5rem}
@@ -46,7 +46,7 @@ p{margin:.6rem 0}
 .popup{position:fixed;z-index:100;background:#fff;border:1px solid #ccc;border-radius:10px;padding:1rem 1.2rem;box-shadow:0 8px 30px rgba(0,0,0,.12);max-width:420px;min-width:160px;max-height:60vh;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .2s}
 .popup.visible{opacity:1;pointer-events:auto}
 .popup .lbl{font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:#b8923e;font-family:Georgia,serif;margin-bottom:.4rem;-webkit-flex-shrink:0;flex-shrink:0}
-.popup .ptxt{font-family:Georgia,serif;font-size:1.05rem;line-height:1.8;direction:ltr;text-align:left;color:#000;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0}
+.popup .ptxt{font-family:Georgia,serif;font-size:1.15rem;line-height:1.8;direction:ltr;text-align:left;color:#000;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0}
 @media(max-width:600px){.popup{left:8px!important;right:8px;bottom:52px;top:auto!important;-webkit-transform:none!important;transform:none!important;width:auto!important;max-width:none;max-height:55vh;border-radius:14px}}
 .popup .x{position:absolute;top:6px;right:8px;width:22px;height:22px;border:none;background:#ddd;border-radius:50%;color:#444;font-size:12px;cursor:pointer;text-align:center;line-height:22px;-webkit-appearance:none;appearance:none}
 .overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:99;display:none}
@@ -73,7 +73,7 @@ p{margin:.6rem 0}
 .spread-btn{display:none}
 @media(min-width:1000px){
 .spread-btn{display:inline-block}
-.page-wrap.spread{max-width:1400px}
+.page-wrap.spread{max-width:1700px}
 #page.spread{display:-webkit-flex;display:flex}
 #page.spread .page-text{-webkit-flex:1;flex:1;min-width:0;padding:0 1.5rem}
 #page.spread .page-text+.page-text{border-right:1px solid #e5e5e5}
@@ -88,6 +88,8 @@ p{margin:.6rem 0}
 <button class="mode-btn active" data-mode="sentence">Fjali</button>
 <button class="mode-btn" data-mode="word">Fjale</button>
 <button class="mode-btn spread-btn" id="spreadBtn">2 faqe</button>
+<button class="mode-btn" id="fontMinus">A&#8722;</button>
+<button class="mode-btn" id="fontPlus">A+</button>
 </div>
 </div>
 <div class="page-wrap" id="page">
@@ -1549,6 +1551,13 @@ var pu=document.getElementById('popup'),pt=document.getElementById('pText');
 var ov=document.getElementById('overlay'),cb=document.getElementById('closeBtn');
 var allP=document.querySelectorAll('[data-p]');
 
+var fs=1.35;
+try{var s=parseFloat(localStorage.getItem('fs'));if(s>=1&&s<=2.2)fs=s}catch(e){}
+function applyFs(){document.documentElement.style.setProperty('--fs',fs+'rem')}
+applyFs();
+var fm=document.getElementById('fontMinus'),fp=document.getElementById('fontPlus');
+if(fm)fm.addEventListener('click',function(){fs=Math.max(1,Math.round((fs-0.1)*10)/10);try{localStorage.setItem('fs',fs)}catch(e){}applyFs()});
+if(fp)fp.addEventListener('click',function(){fs=Math.min(2.2,Math.round((fs+0.1)*10)/10);try{localStorage.setItem('fs',fs)}catch(e){}applyFs()});
 var spread=false;
 function isWide(){return window.innerWidth>=1000}
 function pairOf(i){
