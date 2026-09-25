@@ -33,10 +33,15 @@ html,body{margin:0;padding:0;background:#e8e8e8;color:#000;font-family:'Geeza Pr
 .quran{font-weight:700;color:#c01c28}
 .section-mark{text-align:center;margin:1rem 0}
 p{margin:.6rem 0}
-.page-nav{position:fixed;bottom:0;left:0;right:0;height:44px;background:#e8e8e8;border-top:1px solid #ddd;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;gap:24px;z-index:10}
-.page-nav button{background:none;border:1px solid #ddd;border-radius:6px;width:36px;height:32px;cursor:pointer;color:#000;font-size:1rem;-webkit-appearance:none;appearance:none}
-.page-nav button:disabled{opacity:.25}
-.page-num{font-family:Georgia,serif;font-size:.75rem;color:#444;min-width:60px;text-align:center}
+.page-nav{position:fixed;bottom:0;left:0;right:0;height:44px;background:#e8e8e8;border-top:1px solid #ddd;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;z-index:10}
+.side-arrow{position:fixed;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);z-index:20;background:#fff;border:1px solid #ddd;border-radius:50%;width:44px;height:44px;cursor:pointer;color:#000;font-size:1.15rem;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.12);-webkit-appearance:none;appearance:none}
+.side-arrow:disabled{opacity:.25}
+#prevBtn{left:10px}
+#nextBtn{right:10px}
+@media(max-width:600px){.side-arrow{width:36px;height:36px;font-size:1rem}#prevBtn{left:4px}#nextBtn{right:4px}}
+.page-num{font-family:Georgia,serif;font-size:.75rem;color:#444;min-width:60px;text-align:center;cursor:pointer;padding:3px 10px;border-radius:6px}
+.page-num:active{background:rgba(184,146,62,.13)}
+.page-num input{font-family:Georgia,serif;font-size:.8rem;width:64px;text-align:center;border:1px solid #b8923e;border-radius:6px;padding:3px 4px;color:#000;background:#fff;outline:none;-webkit-appearance:none;appearance:none}
 .popup{position:fixed;z-index:100;background:#fff;border:1px solid #ccc;border-radius:10px;padding:1rem 1.2rem;box-shadow:0 8px 30px rgba(0,0,0,.12);max-width:420px;min-width:160px;opacity:0;pointer-events:none;transition:opacity .2s}
 .popup.visible{opacity:1;pointer-events:auto}
 .popup .lbl{font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:#b8923e;font-family:Georgia,serif;margin-bottom:.4rem}
@@ -1496,11 +1501,11 @@ p{margin:.6rem 0}
 <div class="page-text" data-p="246" hidden><p><span class="s" data-sq="syve, dhe nuk i vjen nga dynjaja veçse çka i është shkruar.'">عينيه، ولم يأته من الدنيا إلا ما كُتِب له».</span></p><p><span class="s" data-sq="Baza e kësaj, siç tha Allahu i Lartësuar:">وأصل ذلك كما قال الله تعالىٰ:</span> <span class="s quran" data-sq="Unë nuk i krijova xhinët dhe njerëzit për tjetër pos që të më adhurojnë. Unë nuk kërkoj prej tyre ndonjë furnizim e as dëshiroj të më ushqejnë ata. All-llahu është furnizues i madh, Ai fuqiforti. [Edh-Dharijat: 56-58]">﴿وَمَا خَلَقْتُ الْجِنَّ وَالْإِنسَ إِلَّا لِيَعْبُدُونِ ۝ مَا أُرِيدُ مِنْهُم مِّن رِّزْقٍ وَمَا أُرِيدُ أَن يُطْعِمُونِ ۝ إِنَّ اللَّهَ هُوَ الرَّزَّاقُ ذُو الْقُوَّةِ الْمَتِينُ﴾ [الذاريات: ٥٦-٥٨].</span></p><p><span class="s" data-sq="I lutemi Allahut të Madhërishëm të na japë sukses neve, vëllezërve tanë e gjithë myslimanëve, në atë çka Ai e do e që e kënaq, nga fjala e vepra, sepse nuk ka forcë e as fuqi veçse me Të. Falënderimet i takojnë Allahut, Zotit të botëve. Allahu e bekoftë e e përshëndettë Muhamedin, familjen e shokët e tij, me përshëndetje të shumta.">فنسأل الله العظيم أن يوفقنا وسائر إخواننا، وجميع المسلمين، لما يحبه لنا ويرضاه من القول والعمل، فإنه لا حول ولا قوة إلا به، والحمد لله رب العالمين، وصلىٰ الله علىٰ محمد وعلىٰ آله وصحبه وسلم تسليمًا كثيرًا.</span></p><p class="section-mark">❊ ❊ ❊</p><p><span class="s" data-sq="U kopjua nga një kopje, pjesa më e madhe e së cilës ishte shkruar me dorën e autorit — Allahu dhëntë dobi nëpërmjet tij. Përfundoi kopjimi paradites, ditën e xhuma, më tetë të muajit Rebiu'l-Evvel, në vitin shtatëqind e tetëdhjetë e një (781 h.). Falënderimi i takon vetëm Allahut.">نقلت من نسخة نقلت جُلَّها بخط المصنف نفع الله به. وكان الفراغ من نسخها بكرة الجمعة ثامن شهر ربيع الأول سنة إحدىٰ وثمانين وسبعمائة، والحمد لله وحده.</span></p><p class="section-mark">﷽</p></div>
 </div>
 <div class="page-nav">
-<button id="prevBtn">&#8592;</button>
-<span class="page-num" id="pageNum"></span>
-<button id="nextBtn">&#8594;</button>
+<span class="page-num" id="pageNum" title="Prek per te shkuar te nje faqe"></span>
 </div>
 </div>
+<button class="side-arrow" id="prevBtn">&#8592;</button>
+<button class="side-arrow" id="nextBtn">&#8594;</button>
 <div class="overlay" id="overlay"></div>
 <div class="popup" id="popup">
 <button class="x" id="closeBtn">&times;</button>
@@ -1548,6 +1553,34 @@ cb.addEventListener('click',hide);
 
 pb.addEventListener('click',function(){if(cp>0){cp--;render()}});
 nb.addEventListener('click',function(){if(cp<total-1){cp++;render()}});
+
+pn.addEventListener('click',function(){
+  if(pn.querySelector('input'))return;
+  var inp=document.createElement('input');
+  inp.type='number';inp.min=1;inp.max=total;inp.value=cp+1;
+  inp.setAttribute('inputmode','numeric');inp.setAttribute('pattern','[0-9]*');
+  pn.textContent='';pn.appendChild(inp);inp.focus();inp.select();
+  var done=false;
+  function go(){
+    if(done)return;done=true;
+    var v=parseInt(inp.value,10);
+    if(!isNaN(v)){cp=Math.max(0,Math.min(total-1,v-1))}
+    render();
+  }
+  inp.addEventListener('keydown',function(e){
+    e.stopPropagation();
+    if(e.key==='Enter'){go()}
+    if(e.key==='Escape'){done=true;render()}
+  });
+  inp.addEventListener('blur',go);
+});
+
+document.addEventListener('keydown',function(e){
+  if(e.target.tagName==='INPUT')return;
+  if(e.key==='ArrowLeft'&&cp>0){cp--;render()}
+  if(e.key==='ArrowRight'&&cp<total-1){cp++;render()}
+  if(e.key==='Escape')hide();
+});
 
 document.querySelectorAll('.mode-btn').forEach(function(b){b.addEventListener('click',function(){
   document.querySelectorAll('.mode-btn').forEach(function(x){x.classList.remove('active')});
